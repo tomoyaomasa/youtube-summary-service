@@ -19,9 +19,14 @@ export default function Footer() {
             </Link>
           </nav>
         </div>
-        <p className="text-center text-xs text-zinc-400 mt-4">
-          &copy; {new Date().getFullYear()} YouTube要約サービス
-        </p>
+        <div className="flex justify-between items-center mt-4">
+          <p className="text-xs text-zinc-400">
+            &copy; {new Date().getFullYear()} YouTube要約サービス
+          </p>
+          <Link href="/admin" className="text-xs text-zinc-300 hover:text-zinc-500">
+            管理者
+          </Link>
+        </div>
       </div>
     </footer>
   );
