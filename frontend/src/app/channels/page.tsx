@@ -6,6 +6,7 @@ import { getChannels } from "@/lib/api";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function ChannelsPage() {
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -41,7 +42,11 @@ export default function ChannelsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">チャンネル一覧</h1>
+      <h1 className="text-2xl font-bold mb-2">チャンネル一覧</h1>
+      <p className="text-zinc-500 text-sm mb-8">
+        通知を受け取りたいチャンネルを選んでください。新しい動画の要約が公開されたら、メールでお知らせします。
+      </p>
+
       {channels.length === 0 ? (
         <p className="text-zinc-500">チャンネルがまだ登録されていません。</p>
       ) : (
@@ -73,6 +78,21 @@ export default function ChannelsPage() {
           ))}
         </div>
       )}
+
+      {/* リクエスト導線バナー */}
+      <Card className="mt-12 border-dashed border-2 border-zinc-300 bg-zinc-50">
+        <CardContent className="p-8 text-center">
+          <h3 className="text-xl font-bold mb-2">見たいチャンネルがありませんか？</h3>
+          <p className="text-zinc-500 text-sm mb-4">
+            リクエストを送っていただければ、優先的に要約を追加します。
+          </p>
+          <Link href="/request">
+            <Button variant="outline" size="lg">
+              チャンネルをリクエストする
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
     </div>
   );
 }

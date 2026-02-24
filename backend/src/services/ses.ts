@@ -120,6 +120,51 @@ export async function sendAdminNotification(
   );
 }
 
+export async function sendWelcomeEmail(
+  toEmail: string,
+  requestedChannel?: string,
+  siteUrl?: string
+) {
+  const baseUrl = siteUrl || process.env.SITE_URL || "https://yourdomain.com";
+  const subject = `【${siteName}】登録完了！まずはチャンネルを選びましょう`;
+
+  const requestedChannelHtml = requestedChannel
+    ? `<p style="color: #333; font-size: 14px; background: #f9f9f9; padding: 12px; border-radius: 6px;">「${requestedChannel}」のリクエストを受け付けました。追加され次第お知らせします。</p>`
+    : "";
+
+  const htmlBody = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <h2 style="color: #1a1a1a;">ご登録ありがとうございます！</h2>
+  <p style="color: #333; font-size: 14px; line-height: 1.6;">
+    ${siteName}へようこそ！<br />
+    さっそく気になるチャンネルを登録して、動画の要約を受け取りましょう。
+  </p>
+  ${requestedChannelHtml}
+  <div style="text-align: center; margin: 24px 0;">
+    <a href="${baseUrl}/channels" style="display: inline-block; background: #ff0000; color: #fff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-weight: bold;">チャンネルを選んで通知を受け取る</a>
+  </div>
+  <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 24px 0;" />
+  <p style="color: #999; font-size: 12px;">${siteName}</p>
+</body>
+</html>`;
+
+  await sesClient.send(
+    new SendEmailCommand({
+      Source: fromEmail,
+      Destination: { ToAddresses: [toEmail] },
+      Message: {
+        Subject: { Data: subject, Charset: "UTF-8" },
+        Body: {
+          Html: { Data: htmlBody, Charset: "UTF-8" },
+        },
+      },
+    })
+  );
+}
+
 export async function sendSummaryNotification(
   toEmail: string,
   channelName: string,

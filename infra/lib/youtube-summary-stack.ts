@@ -89,6 +89,7 @@ export class YoutubeSummaryStack extends cdk.Stack {
     });
 
     // users テーブル（PK: userId = Cognito Sub ID）
+    // 追加フィールド: emailNotification (boolean), requestedChannel (string)
     const usersTable = new dynamodb.Table(this, "UsersTable", {
       tableName: "youtube-summary-users",
       partitionKey: { name: "userId", type: dynamodb.AttributeType.STRING },
