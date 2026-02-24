@@ -29,18 +29,8 @@ export default function Header() {
   }
 
   if (isAdmin) {
-    return (
-      <header className="border-b bg-zinc-900 text-white">
-        <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/admin" className="font-bold text-lg">
-            管理画面
-          </Link>
-          <Link href="/" className="text-sm text-zinc-400 hover:text-white">
-            公開サイトへ
-          </Link>
-        </div>
-      </header>
-    );
+    // Admin header is rendered by AdminHeader component inside admin pages
+    return null;
   }
 
   return (
