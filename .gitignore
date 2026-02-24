@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.local
+.env.production
+dist/
+.next/
+out/
+cdk.out/
+*.js.map
+*.d.ts
+!infra/bin/*.d.ts
+!infra/lib/*.d.ts
+.DS_Store
+.vercel

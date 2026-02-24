@@ -1,0 +1,18 @@
+{
+  "name": "youtube-summary-service",
+  "version": "1.0.0",
+  "private": true,
+  "description": "YouTube動画要約サービス - ビジネス系YouTuberの動画を要約・蓄積するWebサービス",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "infra"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=frontend",
+    "deploy:infra": "npm run deploy --workspace=infra",
+    "deploy:frontend": "npm run deploy --workspace=frontend",
+    "deploy:backend": "npm run build --workspace=backend"
+  }
+}
